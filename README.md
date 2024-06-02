@@ -7,3 +7,4 @@ Nele é possível tomar as seguintes ações:
 - Conferência de extratos
 - Criação de usuários
 - Criação de contas
+- Listar contas
