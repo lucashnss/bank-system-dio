@@ -60,8 +60,6 @@ class Conta():
             print("@@@ Operação falhou. Você não tem saldo suficiente @@@")
         elif valor > 0:
             self._saldo -= valor
-            extrato += f"Saque:\t\tR$ {valor:.2f}\n"
-            numero_saques += 1
             print("\n=== Operação realizada com sucesso! ===")
             return True
         else:
@@ -72,8 +70,6 @@ class Conta():
     def depositar(self,valor:float) -> bool:
         if valor > 0:
             self._saldo += valor
-            extrato += f"Depósito:\tR$ {valor:.2f}\n"
-            print("\n=== Operação realizada com sucesso! ===")
             return True
         else:
             print("\n@@@ Operação falhou. Digite um valor de depósito válida @@@")
@@ -102,8 +98,6 @@ class ContaCorrente(Conta):
             [transacao for transacao in self.historico.transacoes if 
             transacoes["tipo"] == Saque.__name__]
         )
-
-        excedeu_saldo = valor > saldo
 
         excedeu_limite = valor > limite
 
@@ -283,14 +277,6 @@ def listar_contas(*,contas) -> None:
         print(linha)
         
 def main():
-    numero_conta = 1
-    NUMERO_AGENCIA = '0001'
-
-    saldo = 0
-    limite = 500
-    extrato = ""
-    LIMITE_SAQUES = 3
-    numero_saques = 0
     users = []
     contas = []
 
