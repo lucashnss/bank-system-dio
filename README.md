@@ -59,3 +59,9 @@ uma evolução maior do sistema. O projeto na versão POO segue o padrão do seg
 diagrama UML:
 
 ![Diagrama UML - Desafio](Trilha-Python-desafio.png)
+
+
+## Desafio com POO 
+Fazer a modelagem das funções referentes a saques, depósitos, extrato, criação de 
+contas e clientes para classes e também modelar as funções referentes ao menu
+para funcionarem normalmente utilizando POO com as classes modeladas.
