@@ -85,7 +85,7 @@ class ContaCorrente(Conta):
     
     def sacar(self,valor):
         excedeu_saldo = valor > self._saldo
-        
+
         excedeu_limite = valor > self._limite
 
         excedeu_tentativas = self._numero_saques >= self._limite_saques
@@ -212,44 +212,6 @@ def transacao(clientes, tipo_transacao):
         funcao_transacao = Saque(valor)
 
     transacao = funcao_transacao
-
-    conta = recuperar_conta_cliente(cliente)
-
-    if not conta:
-        print("\n@@@ Conta não encontrada! @@@")
-        return
-
-    cliente.realizar_transacoes(conta,transacao)
-
-def depositar(clientes):
-    cpf = input("Informe o CPF do cliente: ")
-    cliente = filtrar_clientes(cpf,clientes)
-
-    if not cliente:
-        print("\n@@@ Cliente não encontrado! @@@")
-        return
-    
-    valor = float(input("Digite o valor do depósito: "))
-    transacao = Deposito(valor)
-
-    conta = recuperar_conta_cliente(cliente)
-
-    if not conta:
-        print("\n@@@ Conta não encontrada! @@@")
-        return
-
-    cliente.realizar_transacoes(conta,transacao)
-
-def sacar(clientes):
-    cpf = input("Informe o CPF do cliente: ")
-    cliente = filtrar_clientes(cpf,clientes)
-
-    if not cliente:
-        print("\n@@@ Cliente não encontrado! @@@")
-        return
-    
-    valor = float(input("Digite o valor do saque: "))
-    transacao = Saque(valor)
 
     conta = recuperar_conta_cliente(cliente)
 
