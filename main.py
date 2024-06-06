@@ -1,6 +1,7 @@
 import textwrap
 from abc import ABC,abstractmethod
 from datetime import datetime
+import functools
 
 class Cliente():
     def __init__(self, endereco) -> None:
@@ -170,6 +171,18 @@ class Saque(Transacao):
         if sucesso_transacao:
             conta.historico.adicionar_transacao(self)
 
+def log_transacao(funcao):
+    @functools.wraps(funcao)
+    def wrapper(*args,**kwargs):
+        print(f"Hora da transação: {datetime.now().strftime("%d-%m-%Y %H:%M:%S")}")
+        funcao(*args,*kwargs)
+        if funcao.__name__ == transacao:
+            print(f"Transação de tipo: {args[1]}")
+        else:
+            print(f"Transação de tipo: {funcao.__name__}")
+
+    return wrapper
+
 def mostrar_menu():
     menu = '''
 ===========================MENU============================
@@ -196,6 +209,7 @@ def recuperar_conta_cliente(cliente):
     # FIXME: Não permite o cliente escolher a conta
     return cliente.contas[0]
 
+@log_transacao
 def transacao(clientes, tipo_transacao):
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_clientes(cpf,clientes)
@@ -221,6 +235,7 @@ def transacao(clientes, tipo_transacao):
 
     cliente.realizar_transacoes(conta,transacao)
 
+@log_transacao
 def exibir_extrato(clientes) -> None:
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_clientes(cpf,clientes)
@@ -252,6 +267,7 @@ def exibir_extrato(clientes) -> None:
         print(f"\nSaldo:\tR${conta.saldo:.2f}")
         print("===========================================================")
 
+@log_transacao
 def criar_cliente(clientes):
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_clientes(cpf,clientes)
@@ -270,6 +286,7 @@ def criar_cliente(clientes):
     print("\n=== Cliente cadastrado com sucesso! ===")
     return clientes
 
+@log_transacao
 def criar_conta(numero_conta,clientes,contas):
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_clientes(cpf,clientes)
