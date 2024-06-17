@@ -5,13 +5,19 @@ import functools
 
 class ContaIterador():
     def __init__(self,contas):
-        pass
+        self.contas = contas
+        self.num_contas = len(contas)
+        self.cont = -1
 
     def __iter__(self):
-        pass
+        return self
 
     def __next__(self):
-        pass
+        if self.cont > self.num_contas - 1:
+            raise StopIteration
+        else:
+            self.cont += 1
+            return str(self.contas[self.cont])
 
 class Cliente():
     def __init__(self, endereco) -> None:
@@ -123,6 +129,7 @@ class ContaCorrente(Conta):
             Agência:\t{self.agencia}
             C\C:\t\t{self.numero}
             Titular:\t{self.cliente.nome}
+            Saldo:\t{self.saldo}
         """
     
 class Historico():
@@ -143,14 +150,9 @@ class Historico():
         )
     
     def gerar_relatorio(self,tipo_transacao=None):
-        if not tipo_transacao:
-            return self._transacoes
-        elif tipo_transacao == Saque:
-            transacoes = [transacao for transacao in self._transacoes if transacao["tipo"] == Saque]
-            return transacoes
-        else:
-            transacoes = [transacao for transacao in self._transacoes if transacao["tipo"] == Deposito]
-            return transacoes
+        for transacao in self._transacoes:
+            if tipo_transacao is None or transacao["tipo"].lower() == tipo_transacao.lower():
+                yield transacao
 
 class Transacao(ABC):
     
@@ -218,6 +220,17 @@ def mostrar_menu():
 '''
     return textwrap.dedent(menu)
 
+def mostrar_menu_extrato():
+    menu = '''
+===========================MENU============================
+    [0]\tApenas Depósitos
+    [1]\tApenas Saques
+    [2]\tExtrato Completo
+    [3]\tVoltar ao menu principal
+    =>
+'''
+    return textwrap.dedent(menu)
+
 def filtrar_clientes(cpf,clientes):
     clientes_filtrados = [cliente for cliente in clientes if cliente.cpf == cpf]
     return clientes_filtrados[0] if clientes_filtrados else None
@@ -256,7 +269,7 @@ def transacao(clientes, tipo_transacao):
     cliente.realizar_transacoes(conta,transacao)
 
 @log_transacao
-def exibir_extrato(clientes) -> None:
+def exibir_extrato(clientes,tipo_extrato=None) -> None:
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_clientes(cpf,clientes)
 
@@ -270,23 +283,21 @@ def exibir_extrato(clientes) -> None:
         print("\n@@@ Conta não encontrada! @@@")
         return
 
-    extrato = ""
     print("\n==========================EXTRATO==========================")
-    
-    transacoes = conta.historico.gerar_relatorio()
+    extrato = ""
+    transacoes = conta.historico.gerar_relatorio(tipo_extrato)
+    tem_transacao = False
 
-    if not transacoes:
-        print("Não foram realizadas movimentações.")
-    else:
-        for transacao in transacoes:
-            if transacao["tipo"] == "Deposito":
-                extrato += f"\n{transacao['tipo']}:\tR${transacao['valor']:.2f}\t Data:\t{transacao['data']}"
-            else:
-                extrato += f"\n{transacao['tipo']}:\t\tR${transacao['valor']:.2f}\t Data:\t{transacao['data']}"
-        
-        print(extrato)
-        print(f"\nSaldo:\tR${conta.saldo:.2f}")
-        print("===========================================================")
+    for transacao in transacoes:
+        tem_transacao = True
+        extrato += f"\n{transacao['tipo']}:\n\tR$ {transacao['valor']:.2f}"
+
+    if not tem_transacao:
+        extrato = "Não foram realizadas movimentações"
+
+    print(extrato)
+    print(f"\nSaldo:\tR$ {conta.saldo:.2f}")
+    print("===========================================================")
 
 @log_transacao
 def criar_cliente(clientes):
@@ -324,7 +335,7 @@ def criar_conta(numero_conta,clientes,contas):
     return contas
 
 def listar_contas(contas) -> None:
-    ContaIterador(contas)
+    return ContaIterador(contas)
     # for conta in contas:
     #     print("=" * 50)
     #     print(textwrap.dedent(str(conta)))
@@ -344,7 +355,18 @@ def main():
             transacao(clientes,"saque")
         # Extrato
         elif opcao == "2":
-            exibir_extrato(clientes)
+            tipo_extrato = input(mostrar_menu_extrato())
+            if tipo_extrato == "0":
+                exibir_extrato(clientes,"Deposito")
+            elif tipo_extrato == "1":
+                exibir_extrato(clientes,"Saque")
+            elif tipo_extrato == "2":
+                exibir_extrato(clientes)
+            elif tipo_extrato == "3":
+                main()
+            else:
+                print("Opção inválida, por favor selecione novamente a opção desejada")
+                
         # Cadastrar cliente
         elif opcao == "3":
             clientes_novos = criar_cliente(clientes)
