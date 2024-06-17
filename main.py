@@ -218,9 +218,9 @@ def log_transacao(funcao):
         print(f"*** Hora da transação: {datetime.now().strftime("%d-%m-%Y %H:%M:%S")} ***")
         funcao(*args,*kwargs)
         if funcao.__name__ == "transacao":
-            print(f"\n*** Transação de tipo: {args[1].title()} ***")
+            print(f"\n*** Transação de tipo: {args[1].upper()} ***")
         else:
-            print(f"\n*** Transação de tipo: {funcao.__name__.title()} ***")
+            print(f"\n*** Transação de tipo: {funcao.__name__.upper()} ***")
 
     return wrapper
 
