@@ -3,6 +3,16 @@ from abc import ABC,abstractmethod
 from datetime import datetime
 import functools
 
+class ContaIterador():
+    def __init__(self,contas):
+        pass
+
+    def __iter__(self):
+        pass
+
+    def __next__(self):
+        pass
+
 class Cliente():
     def __init__(self, endereco) -> None:
         self.endereco:str = endereco
@@ -131,6 +141,16 @@ class Historico():
                 "data" : datetime.now().strftime("%d-%m-%Y %H:%M:%S"),
             }
         )
+    
+    def gerar_relatorio(self,tipo_transacao=None):
+        if not tipo_transacao:
+            return self._transacoes
+        elif tipo_transacao == Saque:
+            transacoes = [transacao for transacao in self._transacoes if transacao["tipo"] == Saque]
+            return transacoes
+        else:
+            transacoes = [transacao for transacao in self._transacoes if transacao["tipo"] == Deposito]
+            return transacoes
 
 class Transacao(ABC):
     
@@ -174,12 +194,12 @@ class Saque(Transacao):
 def log_transacao(funcao):
     @functools.wraps(funcao)
     def wrapper(*args,**kwargs):
-        print(f"Hora da transação: {datetime.now().strftime("%d-%m-%Y %H:%M:%S")}")
+        print(f"*** Hora da transação: {datetime.now().strftime("%d-%m-%Y %H:%M:%S")} ***")
         funcao(*args,*kwargs)
-        if funcao.__name__ == transacao:
-            print(f"Transação de tipo: {args[1]}")
+        if funcao.__name__ == "transacao":
+            print(f"\n*** Transação de tipo: {args[1].title()} ***")
         else:
-            print(f"Transação de tipo: {funcao.__name__}")
+            print(f"\n*** Transação de tipo: {funcao.__name__.title()} ***")
 
     return wrapper
 
@@ -252,7 +272,8 @@ def exibir_extrato(clientes) -> None:
 
     extrato = ""
     print("\n==========================EXTRATO==========================")
-    transacoes = conta.historico.transacoes
+    
+    transacoes = conta.historico.gerar_relatorio()
 
     if not transacoes:
         print("Não foram realizadas movimentações.")
@@ -303,9 +324,10 @@ def criar_conta(numero_conta,clientes,contas):
     return contas
 
 def listar_contas(contas) -> None:
-    for conta in contas:
-        print("=" * 50)
-        print(textwrap.dedent(str(conta)))
+    ContaIterador(contas)
+    # for conta in contas:
+    #     print("=" * 50)
+    #     print(textwrap.dedent(str(conta)))
         
 def main():
     clientes = []
