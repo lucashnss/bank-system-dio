@@ -46,6 +46,9 @@ class PessoaFisica(Cliente):
         self.cpf:str = cpf
         self.nome:str = nome
         self.data_nascimento:str = data_nascimento
+    
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__}: ({self.cpf})>"
 
 class Conta():
     def __init__(self,cliente,numero) -> None:
@@ -134,6 +137,9 @@ class ContaCorrente(Conta):
         else:
             super().sacar(valor)
     
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__}: ('{self.agencia}','{self.numero}','{self.cliente.nome}')>" 
+
     def __str__(self) -> str:
         return f"""\
             Agência:\t{self.agencia}
@@ -212,15 +218,17 @@ class Saque(Transacao):
         if sucesso_transacao:
             conta.historico.adicionar_transacao(self)
 
-def log_transacao(funcao):
-    @functools.wraps(funcao)
+def log_transacao(func):
     def wrapper(*args,**kwargs):
-        print(f"*** Hora da transação: {datetime.now().strftime("%d-%m-%Y %H:%M:%S")} ***")
-        funcao(*args,*kwargs)
-        if funcao.__name__ == "transacao":
-            print(f"\n*** Transação de tipo: {args[1].upper()} ***")
-        else:
-            print(f"\n*** Transação de tipo: {funcao.__name__.upper()} ***")
+        resultado = func(*args,**kwargs)
+        data_hora = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        
+        with open('logs/log.txt', 'a') as arquivo:
+            arquivo.write(
+                f"[{data_hora}] Função '{func.__name__.upper()}' executada com argumentos {args} e {kwargs}. Retornou {resultado}\n"
+            )
+
+        return resultado
 
     return wrapper
 

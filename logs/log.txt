@@ -1,0 +1,4 @@
+[15-07-2024 11:18:26] Função 'CRIAR_CLIENTE' executada com argumentos ([<PessoaFisica: (123)>],) e {}. Retornou [<PessoaFisica: (123)>]
+[15-07-2024 11:18:45] Função 'CRIAR_CONTA' executada com argumentos (1, [<PessoaFisica: (123)>], []) e {}. Retornou None
+[15-07-2024 11:18:56] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (123)>], 'depósito') e {}. Retornou None
+[15-07-2024 11:19:07] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (123)>], 'depósito') e {}. Retornou None
