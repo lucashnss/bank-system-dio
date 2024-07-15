@@ -2,3 +2,10 @@
 [15-07-2024 11:18:45] Função 'CRIAR_CONTA' executada com argumentos (1, [<PessoaFisica: (123)>], []) e {}. Retornou None
 [15-07-2024 11:18:56] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (123)>], 'depósito') e {}. Retornou None
 [15-07-2024 11:19:07] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (123)>], 'depósito') e {}. Retornou None
+[15-07-2024 11:22:52] Função 'CRIAR_CLIENTE' executada com argumentos ([<PessoaFisica: (1)>],) e {}. Retornou [<PessoaFisica: (1)>]
+[15-07-2024 11:25:28] Função 'CRIAR_CLIENTE' executada com argumentos ([<PessoaFisica: (1)>],) e {}. Retornou [<PessoaFisica: (1)>]
+[15-07-2024 11:25:30] Função 'CRIAR_CONTA' executada com argumentos (1, [<PessoaFisica: (1)>], [<ContaCorrente: ('0001','1','Lucas')>]) e {}. Retornou [<ContaCorrente: ('0001','1','Lucas')>]
+[15-07-2024 11:26:10] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'depósito', 1236.56) e {}. Retornou None
+[15-07-2024 11:26:23] Função 'CRIAR_CLIENTE' executada com argumentos ([<PessoaFisica: (1)>],) e {}. Retornou [<PessoaFisica: (1)>]
+[15-07-2024 11:26:25] Função 'CRIAR_CONTA' executada com argumentos (1, [<PessoaFisica: (1)>], [<ContaCorrente: ('0001','1','Lucas')>]) e {}. Retornou [<ContaCorrente: ('0001','1','Lucas')>]
+[15-07-2024 11:26:31] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'depósito', 1500.5) e {}. Retornou None

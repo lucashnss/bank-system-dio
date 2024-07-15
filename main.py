@@ -270,7 +270,7 @@ def recuperar_conta_cliente(cliente):
     return cliente.contas[0]
 
 @log_transacao
-def transacao(clientes, tipo_transacao):
+def transacao(clientes, tipo_transacao,valor):
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_clientes(cpf,clientes)
 
@@ -278,8 +278,6 @@ def transacao(clientes, tipo_transacao):
         print("\n@@@ Cliente não encontrado! @@@")
         return
     
-    valor = float(input(f"Digite o valor do {tipo_transacao}: "))
-
     if tipo_transacao == "depósito":
         funcao_transacao = Deposito(valor)
     else:
@@ -375,10 +373,12 @@ def main():
         opcao = input(mostrar_menu())
         # Depósito
         if opcao == "0":
-            transacao(clientes,"depósito")
+            valor = float(input(f"Digite o valor do Depósito: "))
+            transacao(clientes,"depósito",valor)
         # Sacar
         elif opcao == "1": 
-            transacao(clientes,"saque")
+            valor = float(input(f"Digite o valor do Saque: "))
+            transacao(clientes,"saque",valor)
         # Extrato
         elif opcao == "2":
             tipo_extrato = input(mostrar_menu_extrato())
