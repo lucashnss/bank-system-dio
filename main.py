@@ -116,6 +116,10 @@ class ContaCorrente(Conta):
         self._limite_saques: int = limite_saques
         self._numero_saques: int = 0
 
+    @classmethod
+    def nova_conta(cls, cliente, numero, limite, limite_saques):
+        return cls(cliente, numero, limite, limite_saques)
+    
     def sacar(self, valor):
         excedeu_saldo = valor > self._saldo
 
@@ -376,7 +380,10 @@ def criar_conta(numero_conta, clientes, contas):
         )
         return
 
-    conta = ContaCorrente.nova_conta(cliente, numero_conta)
+    valor_limite = int(input("Qual o valor limite por saque você deseja? "))
+    limite_saques = int(input("Qual o limite de saques por dia você deseja na sua conta? "))
+
+    conta = ContaCorrente.nova_conta(cliente, numero_conta, valor_limite, limite_saques)
     contas.append(conta)
     cliente.contas.append(conta)
     print("\n=== Conta criada com sucesso! ===")

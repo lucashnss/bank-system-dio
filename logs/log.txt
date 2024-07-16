@@ -9,3 +9,20 @@
 [15-07-2024 11:26:23] Função 'CRIAR_CLIENTE' executada com argumentos ([<PessoaFisica: (1)>],) e {}. Retornou [<PessoaFisica: (1)>]
 [15-07-2024 11:26:25] Função 'CRIAR_CONTA' executada com argumentos (1, [<PessoaFisica: (1)>], [<ContaCorrente: ('0001','1','Lucas')>]) e {}. Retornou [<ContaCorrente: ('0001','1','Lucas')>]
 [15-07-2024 11:26:31] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'depósito', 1500.5) e {}. Retornou None
+[15-07-2024 12:28:18] Função 'CRIAR_CLIENTE' executada com argumentos ([<PessoaFisica: (1)>],) e {}. Retornou [<PessoaFisica: (1)>]
+[15-07-2024 12:28:19] Função 'CRIAR_CONTA' executada com argumentos (1, [<PessoaFisica: (1)>], [<ContaCorrente: ('0001','1','Lucas')>]) e {}. Retornou [<ContaCorrente: ('0001','1','Lucas')>]
+[15-07-2024 12:28:22] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'depósito', 500.0) e {}. Retornou None
+[16-07-2024 14:08:45] Função 'CRIAR_CLIENTE' executada com argumentos ([<PessoaFisica: (1)>],) e {}. Retornou [<PessoaFisica: (1)>]
+[16-07-2024 14:09:03] Função 'CRIAR_CONTA' executada com argumentos (1, [<PessoaFisica: (1)>], [<ContaCorrente: ('0001','1','Lucas')>]) e {}. Retornou [<ContaCorrente: ('0001','1','Lucas')>]
+[16-07-2024 14:09:09] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'depósito', 1000.0) e {}. Retornou None
+[16-07-2024 14:09:45] Função 'CRIAR_CLIENTE' executada com argumentos ([<PessoaFisica: (1)>],) e {}. Retornou [<PessoaFisica: (1)>]
+[16-07-2024 14:09:51] Função 'CRIAR_CONTA' executada com argumentos (1, [<PessoaFisica: (1)>], [<ContaCorrente: ('0001','1','Lucas')>]) e {}. Retornou [<ContaCorrente: ('0001','1','Lucas')>]
+[16-07-2024 14:09:57] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'depósito', 10000.0) e {}. Retornou None
+[16-07-2024 14:10:03] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'saque', 1000.0) e {}. Retornou None
+[16-07-2024 14:10:09] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'saque', 500.0) e {}. Retornou None
+[16-07-2024 14:10:13] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'saque', 500.0) e {}. Retornou None
+[16-07-2024 14:10:20] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'saque', 1200.0) e {}. Retornou None
+[16-07-2024 14:10:30] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'saque', 570.0) e {}. Retornou None
+[16-07-2024 14:10:38] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'saque', 800.0) e {}. Retornou None
+[16-07-2024 14:10:47] Função 'EXIBIR_EXTRATO' executada com argumentos ([<PessoaFisica: (1)>],) e {}. Retornou None
+[16-07-2024 14:10:56] Função 'TRANSACAO' executada com argumentos ([<PessoaFisica: (1)>], 'saque', 500.0) e {}. Retornou None
